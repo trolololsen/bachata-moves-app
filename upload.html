@@ -1,48 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Upload Bachata Move</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Bachata Moves Upload</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.27.0/dist/supabase.min.js"></script>
+  <!-- Config with your URL & anon key -->
+  <script src="js/config.js"></script>
+  <!-- Upload logic -->
+  <script src="js/upload.js" defer></script>
 </head>
 <body>
+  <div class="container">
+    <h1>Upload a Bachata Move</h1>
 
-<div class="container">
+    <div class="form-group">
+      <label for="name">Move Name</label>
+      <input type="text" id="name" placeholder="e.g., Basic Step">
+    </div>
 
-<h1>Upload Move</h1>
+    <div class="form-group">
+      <label for="position">Position</label>
+      <select id="position">
+        <option value="">Select Position</option>
+        <option value="open">Open</option>
+        <option value="closed">Closed</option>
+        <option value="cross-body">Cross-Body</option>
+        <option value="side-by-side">Side-by-Side</option>
+        <!-- Add more positions as needed -->
+      </select>
+    </div>
 
-<input id="name" placeholder="Move name">
+    <div class="form-group">
+      <label for="type">Type</label>
+      <select id="type">
+        <option value="">Select Type</option>
+        <option value="move">Move</option>
+        <option value="entry">Entry</option>
+        <option value="exit">Exit</option>
+      </select>
+    </div>
 
-<select id="position">
-  <option value="open">Open</option>
-  <option value="closed">Closed</option>
-  <option value="shadow">Shadow</option>
-  <option value="hammerlock">Hammerlock</option>
-</select>
+    <div class="form-group">
+      <label for="difficulty">Difficulty</label>
+      <select id="difficulty">
+        <option value="">Select Difficulty</option>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+      </select>
+    </div>
 
-<select id="type">
-  <option value="move">Move</option>
-  <option value="entry">Entry</option>
-  <option value="exit">Exit</option>
-</select>
+    <div class="form-group">
+      <label for="video">Video File</label>
+      <input type="file" id="video" accept="video/mp4,video/*">
+    </div>
 
-<select id="difficulty">
-  <option value="beginner">Beginner</option>
-  <option value="intermediate">Intermediate</option>
-  <option value="advanced">Advanced</option>
-</select>
-
-<input type="file" id="video">
-
-<button onclick="uploadMove()">Upload</button>
-
-<p id="status"></p>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="js/config.js"></script>
-<script src="js/upload.js"></script>
-
+    <button id="uploadBtn">Upload Move</button>
+    <div id="status"></div>
+  </div>
 </body>
 </html>
