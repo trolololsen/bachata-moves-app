@@ -1,8 +1,9 @@
+// Upload a Bachata move with video to Supabase
 async function uploadMove() {
   const status = document.getElementById("status");
   status.innerText = "Uploading...";
 
-  // Grab inputs
+  // Grab input fields
   const name = document.getElementById("name").value.trim();
   const position = document.getElementById("position").value;
   const type = document.getElementById("type").value;
@@ -10,46 +11,47 @@ async function uploadMove() {
   const fileInput = document.getElementById("video");
   const file = fileInput.files[0];
 
-  // Basic validation
+  // Validate inputs
   if (!name || !position || !type || !difficulty) {
     status.innerText = "Please fill in all fields.";
     return;
   }
-
   if (!file) {
     status.innerText = "Please select a video file.";
     return;
   }
 
   try {
-    // Create unique file name
-    const fileName = `${Date.now()}-${file.name}`;
+    // Sanitize filename
+    const fileName = `${Date.now()}-${file.name.replace(/\s+/g, "_")}`;
 
-// Upload file
-const { data, error: uploadError } = await supabaseClient
-  .storage
-  .from("videos")
-  .upload(fileName, file); // file is the File object
+    // Upload file to Supabase Storage
+    const { data: uploadData, error: uploadError } = await supabaseClient
+      .storage
+      .from("videos")
+      .upload(fileName, file);
 
-if (uploadError) {
-  status.innerText = "Video upload failed: " + uploadError.message;
-  return;
-}
+    if (uploadError) {
+      console.error("Upload error:", uploadError);
+      status.innerText = "Video upload failed: " + uploadError.message;
+      return;
+    }
 
-// Generate public URL for the uploaded file
-const { publicUrl, error: urlError } = supabaseClient
-  .storage
-  .from("videos")
-  .getPublicUrl(fileName);
+    // Generate public URL for the uploaded video
+    const { data: publicData, error: urlError } = await supabaseClient
+      .storage
+      .from("videos")
+      .getPublicUrl(fileName);
 
-if (urlError) {
-  status.innerText = "Error generating public URL: " + urlError.message;
-  return;
-}
+    if (urlError) {
+      console.error("Public URL error:", urlError);
+      status.innerText = "Failed to get public URL: " + urlError.message;
+      return;
+    }
 
-const videoUrl = publicUrl;
+    const videoUrl = publicData.publicUrl;
 
-    // Insert new move into database
+    // Insert new move into Supabase database
     const { error: dbError } = await supabaseClient
       .from("moves")
       .insert({
@@ -61,18 +63,24 @@ const videoUrl = publicUrl;
       });
 
     if (dbError) {
+      console.error("Database insert error:", dbError);
       status.innerText = "Database insert failed: " + dbError.message;
       return;
     }
 
+    // Success
     status.innerText = "Upload complete!";
+    console.log("Move uploaded successfully:", name, videoUrl);
 
-    // Clear inputs
+    // Clear form
     document.getElementById("name").value = "";
     fileInput.value = "";
 
   } catch (err) {
+    console.error("Unexpected error:", err);
     status.innerText = "Unexpected error: " + err.message;
   }
 }
 
+// Attach upload function to your button
+document.getElementById("uploadBtn").addEventListener("click", uploadMove);
