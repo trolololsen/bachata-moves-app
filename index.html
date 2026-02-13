@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Bachata Moves</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="container">
+
+<h1>Bachata Moves Library</h1>
+
+<h2>Filters</h2>
+
+<select id="filterPosition">
+  <option value="">All Positions</option>
+  <option value="open">Open</option>
+  <option value="closed">Closed</option>
+  <option value="shadow">Shadow</option>
+  <option value="hammerlock">Hammerlock</option>
+</select>
+
+<select id="filterType">
+  <option value="">All Types</option>
+  <option value="move">Move</option>
+  <option value="entry">Entry</option>
+  <option value="exit">Exit</option>
+</select>
+
+<select id="filterDifficulty">
+  <option value="">All Difficulties</option>
+  <option value="beginner">Beginner</option>
+  <option value="intermediate">Intermediate</option>
+  <option value="advanced">Advanced</option>
+</select>
+
+<button onclick="loadMoves()">Apply Filters</button>
+
+<h2>Moves</h2>
+
+<div id="movesContainer"></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

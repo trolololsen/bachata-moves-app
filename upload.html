@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Bachata Move</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="container">
+
+<h1>Upload Move</h1>
+
+<input id="name" placeholder="Move name">
+
+<select id="position">
+  <option value="open">Open</option>
+  <option value="closed">Closed</option>
+  <option value="shadow">Shadow</option>
+  <option value="hammerlock">Hammerlock</option>
+</select>
+
+<select id="type">
+  <option value="move">Move</option>
+  <option value="entry">Entry</option>
+  <option value="exit">Exit</option>
+</select>
+
+<select id="difficulty">
+  <option value="beginner">Beginner</option>
+  <option value="intermediate">Intermediate</option>
+  <option value="advanced">Advanced</option>
+</select>
+
+<input type="file" id="video">
+
+<button onclick="uploadMove()">Upload</button>
+
+<p id="status"></p>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="js/config.js"></script>
+<script src="js/upload.js"></script>
+
+</body>
+</html>
