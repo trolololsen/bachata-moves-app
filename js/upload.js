@@ -25,19 +25,29 @@ async function uploadMove() {
     // Create unique file name
     const fileName = `${Date.now()}-${file.name}`;
 
-    // Upload to Supabase storage
-    const { error: uploadError } = await supabaseClient
-      .storage
-      .from("videos")
-      .upload(fileName, file);
+// Upload file
+const { data, error: uploadError } = await supabaseClient
+  .storage
+  .from("videos")
+  .upload(fileName, file); // file is the File object
 
-    if (uploadError) {
-      status.innerText = "Video upload failed: " + uploadError.message;
-      return;
-    }
+if (uploadError) {
+  status.innerText = "Video upload failed: " + uploadError.message;
+  return;
+}
 
-    // Generate public URL for stored video
-    const videoUrl = `${SUPABASE_URL}/storage/v1/object/public/videos/${fileName}`;
+// Generate public URL for the uploaded file
+const { publicUrl, error: urlError } = supabaseClient
+  .storage
+  .from("videos")
+  .getPublicUrl(fileName);
+
+if (urlError) {
+  status.innerText = "Error generating public URL: " + urlError.message;
+  return;
+}
+
+const videoUrl = publicUrl;
 
     // Insert new move into database
     const { error: dbError } = await supabaseClient
@@ -65,3 +75,4 @@ async function uploadMove() {
     status.innerText = "Unexpected error: " + err.message;
   }
 }
+
