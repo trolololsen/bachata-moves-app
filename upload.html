@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Storage Test</title>
+  <meta charset="UTF-8">
+  <title>Add Move</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="styles.css">
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
@@ -11,12 +13,72 @@
 </head>
 <body>
 
-  <h2>Test Video Upload</h2>
+<h2>Add New Move</h2>
 
-  <input type="file" id="videoFile" accept="video/*">
-  <button id="uploadBtn">Upload</button>
+<input type="text" id="name" placeholder="Move name">
 
-  <p id="status"></p>
+<select id="type">
+  <option value="">Select Type</option>
+  <option>Move</option>
+  <option>Entry</option>
+  <option>Exit</option>
+  <option>Transition</option>
+  <option>Combo</option>
+  <option>Styling</option>
+</select>
+
+<select id="start_position">
+  <option value="">Start Position</option>
+  <option>Open</option>
+  <option>Closed</option>
+  <option>Cross Body</option>
+  <option>Side-by-Side</option>
+  <option>Shadow</option>
+  <option>Hammerlock</option>
+  <option>Double Hand Hold</option>
+  <option>Single Hand Hold</option>
+  <option>Wrap</option>
+  <option>Reverse Wrap</option>
+  <option>Sweetheart</option>
+  <option>Cradle</option>
+  <option>Headloop</option>
+  <option>Pretzel</option>
+  <option>Cuddle</option>
+</select>
+
+<select id="end_position">
+  <option value="">End Position</option>
+  <option>Open</option>
+  <option>Closed</option>
+  <option>Cross Body</option>
+  <option>Side-by-Side</option>
+  <option>Shadow</option>
+  <option>Hammerlock</option>
+  <option>Double Hand Hold</option>
+  <option>Single Hand Hold</option>
+  <option>Wrap</option>
+  <option>Reverse Wrap</option>
+  <option>Sweetheart</option>
+  <option>Cradle</option>
+  <option>Headloop</option>
+  <option>Pretzel</option>
+  <option>Cuddle</option>
+</select>
+
+<select id="difficulty">
+  <option value="">Difficulty</option>
+  <option>Beginner</option>
+  <option>Improver</option>
+  <option>Intermediate</option>
+  <option>Advanced</option>
+  <option>Professional</option>
+</select>
+
+<input type="file" id="videoFile" accept="video/*">
+
+<button id="uploadBtn">Upload</button>
+
+<p id="status"></p>
 
 </body>
 </html>
