@@ -1,18 +1,19 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 20px;
+  margin: 0;
+  padding: 20px;
   background-color: #fafafa;
   color: #222;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
 }
 
 h2 {
   text-align: center;
   margin-bottom: 20px;
-}
-
-.container, .filters {
-  max-width: 800px;
-  margin: auto;
 }
 
 .form-group {
@@ -38,7 +39,7 @@ button {
   font-size: 1rem;
   border-radius: 6px;
   border: none;
-  background-color: #3b82f6; /* blue */
+  background-color: #3b82f6;
   color: white;
   cursor: pointer;
   margin-top: 10px;
@@ -84,11 +85,6 @@ button:hover {
 
 .filters {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
-  margin-bottom: 15px;
-}
-
-.filters select, .filters input[type="text"] {
-  flex: 1 1 150px;
 }
