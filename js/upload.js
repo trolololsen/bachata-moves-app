@@ -7,10 +7,11 @@ document.getElementById("uploadBtn").addEventListener("click", async () => {
   const startPosition = document.getElementById("start_position").value;
   const endPosition = document.getElementById("end_position").value;
   const difficulty = document.getElementById("difficulty").value;
+  const comment = document.getElementById("comment").value.trim();
   const file = document.getElementById("videoFile").files[0];
 
   if (!name || !type || !startPosition || !endPosition || !difficulty || !file) {
-    status.innerText = "Fill all fields.";
+    status.innerText = "Please fill all required fields and select a video.";
     return;
   }
 
@@ -24,7 +25,7 @@ document.getElementById("uploadBtn").addEventListener("click", async () => {
     .upload(fileName, file);
 
   if (uploadError) {
-    status.innerText = "Upload failed: " + uploadError.message;
+    status.innerText = "Video upload failed: " + uploadError.message;
     return;
   }
 
@@ -35,7 +36,7 @@ document.getElementById("uploadBtn").addEventListener("click", async () => {
 
   const videoUrl = publicData.publicUrl;
 
-  status.innerText = "Saving to database...";
+  status.innerText = "Saving move to database...";
 
   const { error: dbError } = await supabaseClient
     .from("moves")
@@ -45,7 +46,8 @@ document.getElementById("uploadBtn").addEventListener("click", async () => {
       start_position: startPosition,
       end_position: endPosition,
       difficulty: difficulty,
-      video_url: videoUrl
+      video_url: videoUrl,
+      comment: comment
     });
 
   if (dbError) {
@@ -53,5 +55,5 @@ document.getElementById("uploadBtn").addEventListener("click", async () => {
     return;
   }
 
-  status.innerText = "Move added successfully.";
+  status.innerText = "Move added successfully!";
 });
